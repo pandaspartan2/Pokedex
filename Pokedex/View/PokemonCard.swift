@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct PokemonCard: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
@@ -19,17 +19,19 @@ struct ContentView: View {
                     .padding(.leading)
                 
                 HStack {
-                    Text("Poison")
-                        .font(.caption)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 8)
-                        .overlay(RoundedRectangle (cornerRadius: 12)
-                                    .fill(Color.white.opacity(0.25))
-                        )
-                        
+                    VStack {
+                        Text("Poison")
+                            .font(.caption)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 8)
+                            .overlay(RoundedRectangle (cornerRadius: 12)
+                                        .fill(Color.white.opacity(0.25))
+                            )
+                            
                         .frame(width: 100, height: 25)
+                    
                     
                     Text("Grass")
                         .font(.caption)
@@ -40,6 +42,7 @@ struct ContentView: View {
                         .overlay(RoundedRectangle (cornerRadius: 12)
                         .fill(Color.white.opacity(0.25))
                     )
+                    }
                     Image("1")
                         .resizable()
                         .scaledToFit()
@@ -54,8 +57,8 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct PokemonCard_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        PokemonCard()
     }
 }
