@@ -1,15 +1,24 @@
 import SwiftUI
-
+import Kingfisher
 struct PokemonDetails: View {
     
+    let pokemonData: PokemonData
+    let pokemonViewModel: PokemonViewModel
+    let backgroundColor: Color
+    
+    init(pokemonData: PokemonData, pokemonViewModel: PokemonViewModel) {
+        self.pokemonData = pokemonData
+        self.pokemonViewModel = pokemonViewModel
+        self.backgroundColor = Color(pokemonViewModel.detectBackgroundColor(forType: pokemonData.type))
+    }
     var body: some View {
         
         ZStack {
-            Color.green.edgesIgnoringSafeArea(.all)
+            backgroundColor.edgesIgnoringSafeArea(.all)
             
             VStack {
                 
-                Image("1")
+            KFImage(URL(string: pokemonData.imageUrl))
                     .resizable()
                     .offset(y: 25)
                     .frame(width: 150, height: 150)
@@ -19,16 +28,16 @@ struct PokemonDetails: View {
                     
                     VStack(spacing: 15) {
                         
-                        Text("#" + String("1"))
+                        Text("#" + String(pokemonData.id))
                             .font(.title)
                             .fontWeight(.bold)
                             .foregroundColor(Color.gray)
                             .padding(.top, 20)
                         
-                        Text("Name")
+                        Text(pokemonData.name)
                             .font(.largeTitle)
                         
-                        Text("Type")
+                        Text(pokemonData.type)
                             .font(.title2).bold()
                             .frame(width: 150, height: 40)
                             .background(Color.green)
@@ -50,7 +59,7 @@ struct PokemonDetails: View {
                                         .foregroundColor(.gray)
                                 }
                                 
-                                Text("Weight")
+                                Text(String(pokemonData.weight))
                                     .font(.subheadline)
                                     .fontWeight(.bold)
                                     .foregroundColor(Color.gray)
@@ -60,7 +69,7 @@ struct PokemonDetails: View {
                                 
                                 HStack(alignment: .center, spacing: 5) {
                                     
-                                    Text("Data")
+                                    Text(String(pokemonData.height))
                                         .font(.title)
                                     
                                     Text("METER")
@@ -79,7 +88,7 @@ struct PokemonDetails: View {
                         .padding(.vertical, 15)
                         .frame(maxWidth: .infinity)
                         
-                        Text("Description")
+                        Text(pokemonData.description)
                             .fontWeight(.bold)
                             .multilineTextAlignment(.center)
                             .foregroundColor(Color(.gray))
@@ -118,8 +127,29 @@ struct PokemonDetails: View {
 }
 
 
-struct PokemonDetails_Previews: PreviewProvider {
-    static var previews: some View {
-        PokemonDetails()
+struct MeterBar: View {
+    @Binding var value: Float
+    @Binding var color: Color
+    var body: some View {
+        GeometryReader { geometry in
+            ZStack(alignment: .leading) {
+                Rectangle().frame(width: geometry.size.width, height: geometry.size.height)
+                    .opacity(0.3)
+                    .foregroundColor(Color(.systemGray))
+                
+                Rectangle().frame(width: min(CGFloat(self.value)*geometry.size.width, geometry.size.width), height: geometry.size.height)
+                    .foregroundColor(color)
+                    .animation(.linear)
+                    .cornerRadius(45)
+                
+            }
+        }
     }
-}   
+}
+
+//
+//struct PokemonDetails_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PokemonDetails()
+//    }
+//}

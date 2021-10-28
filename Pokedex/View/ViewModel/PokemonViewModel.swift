@@ -41,7 +41,7 @@ class PokemonViewModel: ObservableObject {
         case "fire": return .systemRed
         case "water": return .systemBlue
         case "grass": return .systemGreen
-        case "dark": return .systemGray
+        case "dark": return .systemGray2
         case "fairy": return .systemPink
         case "phychic": return .purple
         case "normal": return .systemGray
