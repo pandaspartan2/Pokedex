@@ -10,14 +10,15 @@ import SwiftUI
 struct Pokedexls: View {
     
     private let griditem = [GridItem(.flexible()), GridItem(.flexible())]
-   
+   @ObservedObject var viewModel = PokemonViewModel()
+    
     var body: some View {
         NavigationView {
             ScrollView {
                 LazyVGrid(columns: griditem, spacing: 20) {
                 
-                    ForEach(0..<151) { _ in
-                        PokemonCard()
+                    ForEach(viewModel.pokemon) { Pokemon in
+                        PokemonCard(pokemonData: Pokemon, pokemonViewModel: viewModel)
                     }
                 }
             }
@@ -30,3 +31,5 @@ struct Pokedexls_Previews: PreviewProvider {
         Pokedexls()
     }
 }
+
+
