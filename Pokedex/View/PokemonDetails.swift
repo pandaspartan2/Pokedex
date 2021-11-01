@@ -40,9 +40,9 @@ struct PokemonDetails: View {
                         Text(pokemonData.type)
                             .font(.title2).bold()
                             .frame(width: 150, height: 40)
-                            .background(Color.green)
+                            .background(backgroundColor)
                             .cornerRadius(20)
-                            .shadow(color: .green, radius: 5)
+                            .shadow(color: backgroundColor, radius: 5)
                         
                         HStack {
                             
@@ -50,7 +50,7 @@ struct PokemonDetails: View {
                                 
                                 HStack(alignment: .center, spacing: 5) {
                                     
-                                    Text("Data")
+                                    Text(String(pokemonData.weight/10))
                                         .font(.title)
                                     
                                     Text("KG")
@@ -59,7 +59,7 @@ struct PokemonDetails: View {
                                         .foregroundColor(.gray)
                                 }
                                 
-                                Text(String(pokemonData.weight))
+                                Text("Weight")
                                     .font(.subheadline)
                                     .fontWeight(.bold)
                                     .foregroundColor(Color.gray)
@@ -69,7 +69,7 @@ struct PokemonDetails: View {
                                 
                                 HStack(alignment: .center, spacing: 5) {
                                     
-                                    Text(String(pokemonData.height))
+                                    Text(String(pokemonData.height/10))
                                         .font(.title)
                                     
                                     Text("METER")
@@ -104,6 +104,16 @@ struct PokemonDetails: View {
                                     .padding(.top, 10)
                                     .padding(.horizontal, 20)
                                 
+                            }
+                            
+                            VStack(spacing: 5) {
+                                ForEach(0..<2) { i in
+                                    if( i == 0) {
+                                        StatList(statusName: "atk", value: pokemonData.attack/100, color: backgroundColor)
+                                    } else {
+                                        StatList(statusName: "def", value: pokemonData.defense/100, color: backgroundColor)
+                                    }
+                                }
                             }
                         }
                     }
@@ -143,7 +153,26 @@ struct MeterBar: View {
                     .cornerRadius(45)
                 
             }
+            .cornerRadius(45)
         }
+    }
+}
+
+struct StatList: View {
+    @State var statusName: String
+    @State var value: Float
+    @State var color: Color
+    var body: some View {
+        HStack {
+            Text(statusName.uppercased())
+                .font(.subheadline)
+                .fontWeight(.bold)
+                .foregroundColor(Color.gray)
+                .padding(.trailing, 20)
+            Text(String(Int(value*100)))
+            MeterBar(value: $value, color: $color).frame(height: 10)
+        }
+        .padding(.horizontal, 10)
     }
 }
 

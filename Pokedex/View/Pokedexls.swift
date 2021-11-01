@@ -22,10 +22,13 @@ struct Pokedexls: View {
                             
                             PokemonCard(pokemonData: Pokemon, pokemonViewModel: viewModel)
                             }
+                           
                             }
                 }
             }
+            
             .navigationTitle("POKEDEX")
+           
         }
     }
 }

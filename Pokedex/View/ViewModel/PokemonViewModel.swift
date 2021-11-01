@@ -11,7 +11,7 @@ class PokemonViewModel: ObservableObject {
     
     @Published var pokemon = [PokemonData]()
     
-    let apiURL = "https://firebasestorage.googleapis.com/v0/b/pokedexam-68b7d.appspot.com/o/PokemonforTemporaryStudentUsage%20-%20Transformed%20by%20Data.Page.json?alt=media&token=f35bf605-5cec-47eb-a35b-5d97ed4fa4e0"
+    let apiURL = "https://firebasestorage.googleapis.com/v0/b/pokedex-e15d5.appspot.com/o/pokedex%20pokemon%20-%20Sheet1.json?alt=media&token=f4c6d7a8-3d7a-4dd1-90c1-4ccfcbca7d97"
  
     init() {
     fetchPokemonData()
